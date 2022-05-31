@@ -9,12 +9,7 @@ def find(x):
 
 
 def union(x, y):
-    a = find(x)
-    b = find(y)
-    if a < b:
-        parents[b] = a
-    else:
-        parents[a] = b
+    parents[find(y)] = find(x)
 
 
 N = int(input())
