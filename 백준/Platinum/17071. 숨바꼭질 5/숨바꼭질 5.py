@@ -1,15 +1,13 @@
 from collections import deque
 
 
-N, K = map(int, input().split())
-if N == K:
-    print(0)
-else:
+def bfs():
     answer = 0
     dist = [[0, 0] for _ in range(500001)]
     queue = deque([(N, 1)])
     dist[N][1] = 1
-    while queue and not answer:
+    while queue:
+
         v, idx = queue.popleft()
         time = dist[v][idx] + 1
         idx = 1 - idx
@@ -27,8 +25,15 @@ else:
                 if w == bro:
                     if answer == 0 or time < answer:
                         answer = time
-                        break
+                    return answer - 1
                 if not dist[w][idx]:
                     dist[w][idx] = time
                     queue.append((w, idx))
-    print(answer - 1)
+    return answer - 1
+
+
+N, K = map(int, input().split())
+if N == K:
+    print(0)
+else:
+    print(bfs())
